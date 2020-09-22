@@ -60,6 +60,17 @@ exports.findOne = (req, res) => {
   });
 };
 
+exports.getLangLat = (req, res) => {
+  Product.getLangLat((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving coords.",
+      });
+    else res.send(data);
+  });
+};
+
 // Update an Product identified by the ProductId in the request
 exports.update = (req, res) => {
   // Validate Request

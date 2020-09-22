@@ -6,6 +6,9 @@ module.exports = app => {
   
     // Retrieve all Products
     app.get("/Product", Product.findAll);
+    
+    // Retrieve product's langlat values
+    app.get("/Product/langLat/", Product.getLangLat);
   
     // Retrieve a single Product with ProductId
     app.get("/Product/:ProductId", Product.findOne);
