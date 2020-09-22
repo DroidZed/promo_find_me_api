@@ -9,7 +9,7 @@ const Product = function (product) {
   this.image = product.image;
   this.address = product.address;
   this.promo = product.promo;
-  this.lngLat = product.lngLat;
+  this.lnglat = product.lnglat;
 };
 
 Product.create = (newProduct, result) => {
@@ -57,9 +57,22 @@ Product.getAll = (result) => {
   });
 };
 
+Product.getLangLat = (result) => {
+  sql.query("SELECT lnglat FROM Product", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("Coords: ", res);
+    result(null, res);
+  });
+};
+
 Product.updateById = (id, product, result) => {
   sql.query(
-    "UPDATE Product SET name = ?, description = ?, type = ?, image = ?, address = ?, promo = ?, lngLat = ? WHERE id = ?",
+    "UPDATE Product SET name = ?, description = ?, type = ?, image = ?, address = ?, promo = ?, lnglat = ? WHERE id = ?",
     [
       product.name,
       product.description,
@@ -67,7 +80,7 @@ Product.updateById = (id, product, result) => {
       product.image,
       product.address,
       product.promo,
-      product.lngLat,
+      product.lnglat,
       id,
     ],
     (err, res) => {
